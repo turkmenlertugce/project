@@ -25,7 +25,7 @@ const AccountActivation = () => {
             console.log(err);
 
         })
-    },[setUserr]);
+    },[userr]);
 
     
     useEffect(() => {
