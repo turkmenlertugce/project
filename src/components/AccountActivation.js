@@ -28,10 +28,7 @@ const AccountActivation = () => {
     },[userr]);
 
     
-    useEffect(() => {
-        activate()
-    }, [activate])
-
+ 
 
     /*const activate = () => {
         axios.post('https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/activate_account/confirm', {password:password,passwordAgain:passwordAgain}).
