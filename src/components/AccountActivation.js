@@ -26,6 +26,11 @@ const AccountActivation = () => {
 
         })
     },[userr]);
+    
+       useEffect(() => {
+        activate()
+    }, [activate])
+
 
     
  
