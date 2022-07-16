@@ -17,7 +17,7 @@ const AccountActivation = () => {
     }, [])
 
     const activate = useCallback(async () => {
-        axios.post(`https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/activate_account/confirm?token=${location.pathname.substring(18)}`, {password:password,passwordAgain:passwordAgain}).
+        axios.post(`https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/activate_account/confirm?token=${location.pathname.substring(19)}`, {password:password,passwordAgain:passwordAgain}).
         then(res => {
             console.log(res.data);
             navigation("/");
@@ -25,7 +25,7 @@ const AccountActivation = () => {
             console.log(err);
 
         })
-    },[setUserr]);
+    },[userr]);
 
     
     useEffect(() => {
