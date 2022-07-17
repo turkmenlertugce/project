@@ -1,61 +1,52 @@
-import axios from 'axios'
-import React, { useEffect, useState, useCallback } from 'react'
-import { useNavigate,useLocation } from 'react-router-dom';
+import React, { Component, useEffect, useState } from 'react';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import Home from './components/Home';
+import Nav from './components/Nav';
+import Login from './components/Login';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Register from './components/Register';
+import Forgot from './components/Forgot';
+import { PleaseVerifyEmailPage } from './components/PleaseVerifyEmailPage';
+import axios from 'axios';
+import ResetPassword from './components/ResetPassword';
+import AccountActivation from './components/AccountActivation';
 
-const AccountActivation = () => {
-    const [password,setPassword] = useState("")
-    const [passwordAgain,setPasswordAgain] = useState("")
-    const location = useLocation();
-   
-
-    const navigation = useNavigate();
-
-    const [userr , setUserr] = useState([]);
-
-    useEffect(() => {
-        setUserr(JSON.parse(localStorage.getItem("user")));
-        console.log(userr);
-    }, [])
-
-    const activate = () => {
-        axios.post(`https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/activate_account/confirm/token=${location.pathname.substring(19)}`, {password:password,passwordAgain:passwordAgain}).
-        then(res => {
-            console.log(res.data);
-            navigation("/");
-        }).catch(err => {
-            console.log(err);
-        })
-    };
-
+const App = () => {
+  
+  const [user, setUser] = useState(null);
   
 
-    /*const activate = () => {
-        axios.post('https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/activate_account/confirm', {password:password,passwordAgain:passwordAgain}).
-        then(res => {
-            console.log(res.data);
-            navigation("/");
-        }).catch(err => {
-            console.log(err);
+  useEffect(() => {
+    try {
+      setUser(JSON.parse(localStorage.getItem("user")));
+    } catch (error) {
+      console.log(error);
+      setUser(null);
+    }
+  }, []);
 
-        })
-    }*/
-
+  
   return (
-    <div>
-        <h3>Account Activation</h3>
-        <div className="form-group">
-            <label>Password</label>
-            <input type="password" className="form-control" placeholder="Password" value={password}
-            onChange={e => setPassword(e.target.value)}/>
+    <BrowserRouter>
+      <div className="App">
+       <Nav user={user} setUser={setUser}/>
+       <div className="auth-wrapper">
+        <div className="auth-inner">
+          <Routes>
+            <Route exact path="/" element = {<Home user={user} setUser={setUser}/>} />
+            <Route path="/login" element={<Login user={user} setUser={setUser}/>} />
+            <Route path="/please-verify" element = {<PleaseVerifyEmailPage/>}/>
+            <Route path="/register" element={<Register/>} />
+            <Route path="/forgot" element={<Forgot/>} />
+            <Route path="/reset-password" element={<ResetPassword/>} />
+            <Route path="/account-activation/*" element={<AccountActivation/>} />
+          </Routes>
         </div>
-        <div className="form-group">
-            <label>Password Again</label>
-            <input type="password" className="form-control" placeholder="Password" value={passwordAgain}
-            onChange={e => setPasswordAgain(e.target.value)}/>
-        </div>
-        <button onClick={activate} className="btn.btn-primary btn-block">Activate</button>
-    </div>
+       </div>
+      </div>
+    </BrowserRouter>
   )
 }
 
-export default AccountActivation
+export default App
