@@ -40,7 +40,7 @@ const App = () => {
             <Route path="/register" element={<Register/>} />
             <Route path="/forgot" element={<Forgot/>} />
             <Route path="/reset-password" element={<ResetPassword/>} />
-            <Route path="/account-activation" element={<AccountActivation/>} />
+            <Route path="/account-activation/*" element={<AccountActivation/>} />
           </Routes>
         </div>
        </div>
