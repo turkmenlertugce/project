@@ -6,7 +6,7 @@ const AccountActivation = () => {
     const [password,setPassword] = useState("")
     const [passwordAgain,setPasswordAgain] = useState("")
     const location = useLocation();
-    const token = location.pathname.substring(19);
+    const token = location.pathname.substring(20);
    
 
     const navigation = useNavigate();
@@ -19,7 +19,7 @@ const AccountActivation = () => {
     }, [])
 
     const activate = () => {
-        axios.post('https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/activate_account/confirm?'+ token, {password:password,passwordAgain:passwordAgain}).
+        axios.post('https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/activate_account/confirm'+ token, {password:password,passwordAgain:passwordAgain}).
 
         then(res => {
             console.log(res.data);
