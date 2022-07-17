@@ -10,14 +10,15 @@ const AccountActivation = () => {
 
     const navigation = useNavigate();
 
-    const [userr , setUserr] = useState([])
+    const [userr , setUserr] = useState([]);
+
     useEffect(() => {
         setUserr(JSON.parse(localStorage.getItem("user")));
         console.log(userr);
     }, [])
 
     const activate = () => {
-        axios.post(`https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/https:/project-ten-plum.vercel.app/account-activation/token=${location.pathname.substring(19)}`, {password:password,passwordAgain:passwordAgain}).
+        axios.post(`https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/activate_account/confirm/token=${location.pathname.substring(19)}`, {password:password,passwordAgain:passwordAgain}).
         then(res => {
             console.log(res.data);
             navigation("/");
@@ -26,7 +27,8 @@ const AccountActivation = () => {
         })
     };
 
-    
+  
+
     /*const activate = () => {
         axios.post('https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/activate_account/confirm', {password:password,passwordAgain:passwordAgain}).
         then(res => {
