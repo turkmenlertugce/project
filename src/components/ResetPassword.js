@@ -1,21 +1,25 @@
 import axios from 'axios'
 import React, { useEffect, useState,useCallback } from 'react'
-import { useNavigate} from 'react-router-dom'
+import { useNavigate,useLocation} from 'react-router-dom'
 
 const ResetPassword = () => {
     const [password,setPassword] = useState("")
     const [passwordAgain,setPasswordAgain] = useState("")
+    
+    const location1 = useLocation();
+    const token1 = location1.pathname.substring(16);
 
     const navigation = useNavigate();
 
     const [userr , setUserr] = useState([])
+    
     useEffect(() => {
         setUserr(JSON.parse(localStorage.getItem("user")));
         console.log(userr);
     }, [])
 
     const confirm = () => {
-        axios.post('https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/reset_password/confirm', {password:password,passwordAgain:passwordAgain}).
+        axios.post('https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/reset_password/confirm?'+ token1, {password:password,passwordAgain:passwordAgain}).
         then(res => {
             console.log(res.data);
             navigation("/");
@@ -23,7 +27,8 @@ const ResetPassword = () => {
             console.log(err);
            
         })
-    }
+    };
+    
 
   return (
     <div>
