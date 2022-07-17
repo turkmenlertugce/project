@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import axios from 'axios'
 import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigate,useLocation } from 'react-router-dom';
@@ -22,23 +16,17 @@ const AccountActivation = () => {
         console.log(userr);
     }, [])
 
-    const activate = useCallback(async () => {
+    const activate = () => {
         axios.post(`https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/https:/project-ten-plum.vercel.app/account-activation/token=${location.pathname.substring(19)}`, {password:password,passwordAgain:passwordAgain}).
         then(res => {
             console.log(res.data);
             navigation("/");
         }).catch(err => {
             console.log(err);
-
         })
-    },[userr]);
+    };
 
     
-    useEffect(() => {
-        activate()
-    }, [activate])
-
-
     /*const activate = () => {
         axios.post('https://faxriboot-env.eba-dincnkef.us-east-1.elasticbeanstalk.com/api/activate_account/confirm', {password:password,passwordAgain:passwordAgain}).
         then(res => {
