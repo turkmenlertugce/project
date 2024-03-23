@@ -1,0 +1,1 @@
+The prototype "Wanderbud," capable of recognizing and tracking the logo on its owner's back, was developed collaboratively with my teammates. This project encouraged me to explore and learn about Arduino, sensors, and Raspberry Pi.
